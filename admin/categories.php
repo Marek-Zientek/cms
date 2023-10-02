@@ -35,7 +35,7 @@ include "includes/admin_header.php";
                         </form>
 
 
-                        <?php
+                        <?php // UPDATE AND INCLUDE QUERY
 
                         if (isset($_GET['edit'])) {
                             $cat_id = $_GET['edit'];
@@ -61,34 +61,13 @@ include "includes/admin_header.php";
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php // find all categories
-                                $query = "SELECT * FROM categories";
-                                $select_categories  = mysqli_query($connection, $query);
-
-                                while ($row = mysqli_fetch_array($select_categories)) {
-                                    $cat_id = $row['cat_id'];
-                                    $cat_title = $row['cat_title'];
-                                ?>
-                                    <tr>
-                                        <td><?= $cat_id ?></td>
-                                        <td><?= $cat_title ?></td>
-                                        <td><a class="btn btn-danger" href="categories.php?delete=<?= $cat_id ?>">DELETE</a></td>
-                                        <td><a class="btn btn-warning" href="categories.php?edit=<?= $cat_id ?>">EDIT</a></td>
-                                    </tr>
-                                <?php
-                                }
-
-                                ?>
-
-                                <?php
+                                <?php // FIND ALL CATEGORIES QUERY
 
 
-                                if (isset($_GET['delete'])) {
-                                    $the_cat_id = $_GET['delete'];
-                                    $query = "DELETE FROM categories WHERE cat_id = {$cat_id}";
-                                    $delete_query = mysqli_query($connection, $query);
-                                    header("Location: categories.php");
-                                }
+                                findAllCategories();
+
+
+                                deleteCategories();
 
 
                                 ?>
