@@ -32,8 +32,8 @@ include "includes/admin_header.php";
                         case 'add_post':
                             include "includes/add_post.php";
                             break;
-                        case '100':
-                            echo "NICE NICE";
+                        case 'edit_post':
+                            include "includes/add_post.php";
                             break;
                         case '20':
                             echo "NICE";
