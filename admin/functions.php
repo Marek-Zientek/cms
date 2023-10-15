@@ -1,5 +1,7 @@
 <?php
 
+function confirm();
+
 function insert_categories()
 {
     global $connection;
