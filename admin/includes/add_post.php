@@ -1,4 +1,5 @@
 <?php
+// include "../functions.php";
 
 if (isset($_POST['create_post'])) {
     $post_title = $_POST['title'];
@@ -25,9 +26,7 @@ if (isset($_POST['create_post'])) {
 
     $create_post_query = mysqli_query($connection, $query);
 
-    if (!$create_post_query) {
-        die("QUERY FAILED" . mysqli_error($connection));
-    }
+    comfirmQuery($create_post_query);
 }
 
 ?>

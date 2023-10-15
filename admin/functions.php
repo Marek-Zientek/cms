@@ -1,6 +1,14 @@
 <?php
 
-function confirm();
+function comfirmQuery($result)
+{
+    global $connection;
+
+    if (!$result) {
+        die("QUERY FAILED" . mysqli_error($connection));
+    }
+    return $result;
+}
 
 function insert_categories()
 {
