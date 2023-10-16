@@ -26,7 +26,7 @@ if (isset($_POST['create_post'])) {
 
     $create_post_query = mysqli_query($connection, $query);
 
-    comfirmQuery($create_post_query);
+    confirmQuery($create_post_query);
 }
 
 ?>
