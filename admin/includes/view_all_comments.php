@@ -58,9 +58,9 @@
             echo "<td> <a href=\"../post.php?post_id={$post_id}\">{$post_title}</a></td>";
 
             echo "<td>{$comment_date}</td>";
-            echo "<td><a class=\"btn btn-success\" href=\"posts.php?delete={$comment_id}\">Approve</a></td>";
-            echo "<td><a class=\"btn btn-danger\" href=\"posts.php?delete={$comment_id}\">Unapprove</a></td>";
-            echo "<td><a class=\"btn btn-danger\" href=\"posts.php?delete={$comment_id}\">Delete</a></td>";
+            echo "<td><a class=\"btn btn-success\" href=\"comments.php?approve={$comment_id}\">Approve</a></td>";
+            echo "<td><a class=\"btn btn-danger\" href=\"comments.php?unapprove={$comment_id}\">Unapprove</a></td>";
+            echo "<td><a class=\"btn btn-danger\" href=\"comments.php?delete={$comment_id}\">Delete</a></td>";
             echo "<td><a class=\"btn btn-warning\" href=\"posts.php?source=edit_post&post_id={$comment_id}\">Edit Post</a></td>";
             echo "</tr>";
         }
@@ -75,13 +75,36 @@
 
 <?php
 
-if (isset($_GET['delete'])) {
-    $post_id = $_GET['delete'];
 
-    $query = "DELETE FROM posts WHERE post_id = {$post_id}";
+if (isset($_GET['approve'])) {
+    $the_comment_id = $_GET['approve'];
+
+    $query = "UPDATE comments SET comment_status = 'approve' WHERE comment_id = {$comment_id} ";
+    $approve_comment_query = mysqli_query($connection, $query);
+    confirmQuery($approve_comment_query);
+    header("Location: comments.php");
+}
+
+
+if (isset($_GET['unapprove'])) {
+    $the_comment_id = $_GET['unapprove'];
+
+    $query = "UPDATE comments SET comment_status = 'unapprove' WHERE comment_id = {$comment_id} ";
+    $unapprove_comment_query = mysqli_query($connection, $query);
+    confirmQuery($unapprove_comment_query);
+    header("Location: comments.php");
+}
+
+
+
+
+if (isset($_GET['delete'])) {
+    $the_comment_id = $_GET['delete'];
+
+    $query = "DELETE FROM comments WHERE comment_id = {$the_comment_id}";
     $delete_query = mysqli_query($connection, $query);
     confirmQuery($delete_query);
-    header("Location: posts.php");
+    header("Location: comments.php");
 }
 
 ?>
