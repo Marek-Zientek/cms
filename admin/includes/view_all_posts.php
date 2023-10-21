@@ -10,6 +10,8 @@
             <th>Tags</th>
             <th>Comments</th>
             <th>date</th>
+            <th>delete</th>
+            <th>edit</th>
         </tr>
     </thead>
     <tbody>

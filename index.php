@@ -14,7 +14,7 @@ include "./includes/navigation.php";
         <div class="col-md-8">
             <?php
 
-            $query = "SELECT * FROM posts";
+            $query = "SELECT * FROM posts ";
             $select_all_posts_query = mysqli_query($connection, $query);
 
             while ($row = mysqli_fetch_array($select_all_posts_query)) {
@@ -24,31 +24,42 @@ include "./includes/navigation.php";
                 $post_date = $row['post_date'];
                 $post_image = $row['post_image'];
                 $post_content = substr($row['post_content'], 0, 200);
+                $post_status = $row['post_status'];
+
+                if ($post_status !== 'published') {
+                    echo "<h1>NO PUBLISH POSTS</h1>";
+                } else {
+
+
 
             ?>
 
-                <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
-                </h1>
+                    <h1 class="page-header">
+                        Page Heading
+                        <small>Secondary Text</small>
+                    </h1>
 
-                <!-- First Blog Post -->
-                <h2>
-                    <a href="post.php?post_id=<?= $post_id ?>"><?= $post_title ?></a>
-                </h2>
-                <p class="lead">
-                    by <a href="index.php"><?= $post_author ?></a>
-                </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on <?= $post_date ?></p>
-                <hr>
-                <img class="img-responsive" src="images/<?= $post_image ?>" alt="">
-                <hr>
-                <p><?= $post_content ?></p>
-                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <!-- First Blog Post -->
+                    <h2>
+                        <a href="post.php?post_id=<?= $post_id ?>"><?= $post_title ?></a>
+                    </h2>
+                    <p class="lead">
+                        by <a href="index.php"><?= $post_author ?></a>
+                    </p>
+                    <p><span class="glyphicon glyphicon-time"></span> Posted on <?= $post_date ?></p>
+                    <hr>
+                    <img class="img-responsive" src="images/<?= $post_image ?>" alt="">
+                    <hr>
+                    <p><?= $post_content ?></p>
+                    <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
-                <hr>
+                    <hr>
             <?php
+                }
             }
+
+
+
 
             ?>
 
