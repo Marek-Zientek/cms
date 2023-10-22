@@ -6,6 +6,7 @@
             <th>firstName</th>
             <th>lastName</th>
             <th>email</th>
+            <th>User image</th>
             <th>role</th>
             <th>date</th>
 
@@ -33,7 +34,7 @@
             echo "<td>{$user_firstname}</td>";
             echo "<td>{$user_lastname}</td>";
             echo "<td>{$user_email}</td>";
-            echo "<td>{$user_image}</td>";
+            echo "<td><img class=\"img-responsive\" style=\"width:100px; height:100px;\" src=\"../images/user_images/{$user_image}\" alt=\"\"></td>";
             echo "<td>{$user_role}</td>";
 
             // $query = "SELECT * FROM posts where post_id = {$comment_post_id}";
@@ -45,10 +46,10 @@
             // echo "<td> <a href=\"../post.php?post_id={$post_id}\">{$post_title}</a></td>";
 
             // echo "<td>{$comment_date}</td>";
-            // echo "<td><a class=\"btn btn-success\" href=\"comments.php?approve={$comment_id}\">Approve</a></td>";
-            echo "<td><a class=\"btn btn-danger\" href=\"comments.php?unapprove=\">Unapprove</a></td>";
-            echo "<td><a class=\"btn btn-danger\" href=\"comments.php?delete=\">Delete</a></td>";
-            echo "<td><a class=\"btn btn-warning\" href=\"posts.php?source=edit_post&post_id=\">Edit Post</a></td>";
+            echo "<td><a class=\"btn btn-success\" href=\"users.php?change_to_admin={$user_id}\">Admin</a></td>";
+            echo "<td><a class=\"btn btn-danger\" href=\"users.php?change_to_subscriber={$user_id}\">Subscriber</a></td>";
+            echo "<td><a class=\"btn btn-danger\" href=\"users.php?delete={$user_id}\">Delete user</a></td>";
+            echo "<td><a class=\"btn btn-warning\" href=\"users.php?source=edit_user&edit_user={$user_id}\">Edit user</a></td>";
             echo "</tr>";
         }
 
@@ -63,35 +64,35 @@
 <?php
 
 
-if (isset($_GET['approve'])) {
-    $the_comment_id = $_GET['approve'];
+if (isset($_GET['change_to_admin'])) {
+    $the_user_id = $_GET['change_to_admin'];
 
-    $query = "UPDATE comments SET comment_status = 'approve' WHERE comment_id = {$comment_id} ";
-    $approve_comment_query = mysqli_query($connection, $query);
-    confirmQuery($approve_comment_query);
-    header("Location: comments.php");
+    $query = "UPDATE users SET user_role = 'admin' WHERE user_id = {$the_user_id} ";
+    $change_to_admin = mysqli_query($connection, $query);
+    confirmQuery($change_to_admin);
+    header("Location: users.php");
 }
 
 
-if (isset($_GET['unapprove'])) {
-    $the_comment_id = $_GET['unapprove'];
+if (isset($_GET['change_to_subscriber'])) {
+    $the_user_id = $_GET['change_to_subscriber'];
 
-    $query = "UPDATE comments SET comment_status = 'unapprove' WHERE comment_id = {$comment_id} ";
-    $unapprove_comment_query = mysqli_query($connection, $query);
-    confirmQuery($unapprove_comment_query);
-    header("Location: comments.php");
+    $query = "UPDATE users SET user_role = 'subscriber' WHERE user_id = {$the_user_id} ";
+    $change_sub_query = mysqli_query($connection, $query);
+    confirmQuery($change_sub_query);
+    header("Location: users.php");
 }
 
 
 
 
 if (isset($_GET['delete'])) {
-    $the_comment_id = $_GET['delete'];
+    $the_user_id = $_GET['delete'];
 
-    $query = "DELETE FROM comments WHERE comment_id = {$the_comment_id}";
-    $delete_query = mysqli_query($connection, $query);
-    confirmQuery($delete_query);
-    header("Location: comments.php");
+    $query = "DELETE FROM users WHERE user_id = {$the_user_id}";
+    $delete_user_query = mysqli_query($connection, $query);
+    confirmQuery($delete_user_query);
+    header("Location: users.php");
 }
 
 ?>
