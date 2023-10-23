@@ -26,7 +26,7 @@ include "./includes/navigation.php";
                 $post_content = substr($row['post_content'], 0, 200);
                 $post_status = $row['post_status'];
 
-                if ($post_status !== 'published') {
+                if ($post_status !== 'Published') {
                     echo "<h1>NO PUBLISH POSTS</h1>";
                 } else {
 
