@@ -26,9 +26,8 @@ include "./includes/navigation.php";
                 $post_content = substr($row['post_content'], 0, 200);
                 $post_status = $row['post_status'];
 
-                if ($post_status !== 'Published') {
-                    echo "<h1>NO PUBLISH POSTS</h1>";
-                } else {
+                if ($post_status == 'Published') {
+
 
 
 
@@ -51,7 +50,7 @@ include "./includes/navigation.php";
                     <img class="img-responsive" src="images/<?= $post_image ?>" alt="">
                     <hr>
                     <p><?= $post_content ?></p>
-                    <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+
 
                     <hr>
             <?php
