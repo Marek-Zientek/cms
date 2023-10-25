@@ -47,7 +47,9 @@ include "./includes/navigation.php";
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span> Posted on <?= $post_date ?></p>
                     <hr>
-                    <img class="img-responsive" src="images/<?= $post_image ?>" alt="">
+                    <a href="post.php?post_id=<?= $post_id ?>">
+                        <img class="img-responsive" src="images/<?= $post_image ?>" alt="">
+                    </a>
                     <hr>
                     <p><?= $post_content ?></p>
 

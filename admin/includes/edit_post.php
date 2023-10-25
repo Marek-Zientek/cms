@@ -95,10 +95,21 @@ if (isset($_POST['update_post'])) {
         <label for="post_author">Post Author</label>
         <input type="text" class="form-control" name="post_author" value="<?= $post_author; ?>">
     </div>
+
     <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <input type="text" class="form-control" name="post_status" value="<?= $post_status; ?>">
+        <select name="post_status" id="">
+            <option value='<?= $post_status; ?>'><?= $post_status; ?></option>
+            <?php
+            if ($post_status == 'Published') {
+                echo "<option value='draft'>Draft</option>";
+            } else {
+                echo "<option value='published'>Published</option>";
+            }
+            ?>
+        </select>
     </div>
+
+
     <div class="form-group">
         <label for="post_image">Post image</label>
         <input type="file" class="form-control" name="post_image">
@@ -110,7 +121,7 @@ if (isset($_POST['update_post'])) {
     </div>
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea name="post_content" class="form-control" cols="30" rows="10">
+        <textarea id="summernote" name="post_content" class="form-control" cols="30" rows="10">
             <?php echo  $post_content; ?>
         </textarea>
     </div>

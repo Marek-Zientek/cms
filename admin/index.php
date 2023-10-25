@@ -153,6 +153,11 @@ include "includes/admin_header.php";
 
             <?php
 
+            $query = "SELECT * FROM posts WHERE post_status = 'Published'";
+            $select_all_publish_post = mysqli_query($connection, $query);
+            $post_publish_count = mysqli_num_rows($select_all_publish_post);
+
+
             $query = "SELECT * FROM posts WHERE post_status = 'draft'";
             $select_all_draft_post = mysqli_query($connection, $query);
             $post_draft_count = mysqli_num_rows($select_all_draft_post);
@@ -185,8 +190,8 @@ include "includes/admin_header.php";
 
                             <?php
 
-                            $element_text = ['Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories'];
-                            $element_count = [$post_count, $post_draft_count, $comment_count, $unapprove_comment_count, $users_count, $subscriber_count, $categories_count];
+                            $element_text = ['All Posts', 'Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories'];
+                            $element_count = [$post_count, $post_publish_count, $post_draft_count, $comment_count, $unapprove_comment_count, $users_count, $subscriber_count, $categories_count];
 
                             for ($i = 0; $i < 7; $i++) {
                                 echo "['{$element_text[$i]}'" . " ," . "{$element_count[$i]}],";

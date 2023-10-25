@@ -26,6 +26,8 @@ if (!isset($_SESSION['user_role'])) {
 
     <title>SB Admin - Bootstrap Admin Template</title>
 
+    <link href="assets/summernote/summernote.min.css" rel="stylesheet">
+
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
