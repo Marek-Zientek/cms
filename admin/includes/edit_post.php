@@ -64,6 +64,10 @@ if (isset($_POST['update_post'])) {
     $update_post = mysqli_query($connection, $query);
 
     confirmQuery($update_post);
+
+    echo "<div class=\"alert alert-success\" role=\"alert\">
+    Post Updated. <a href='../post.php?post_id={$post_id}'><strong>View Post</strong></a> or <a href='posts.php'><strong>Edit more Posts</strong></a>
+  </div>";
 }
 
 ?>
