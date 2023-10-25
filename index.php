@@ -52,7 +52,9 @@ include "./includes/navigation.php";
                     </a>
                     <hr>
                     <p><?= $post_content ?></p>
-
+                    <a href="post.php?post_id=<?= $post_id ?>" class="btn btn-primary">
+                        Read More<span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
 
                     <hr>
             <?php
