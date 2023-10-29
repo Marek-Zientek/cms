@@ -28,6 +28,7 @@ if (isset($_POST['edit_user'])) {
     $user_image = $_FILES['user_image']['name'];
     $user_image_temp = $_FILES['user_image']['tmp_name'];
     $user_password = $_POST['user_password'];
+    $user_password_hash = password_hash($_POST['user_password'], PASSWORD_DEFAULT);
 
     // $post_date = date("d-m-y");
     // $post_comment_count = 4;
@@ -51,7 +52,7 @@ if (isset($_POST['edit_user'])) {
     $query .= "user_lastname = '{$user_lastname}', ";
     $query .= "user_email = '{$user_email}', ";
     $query .= "user_image = '{$user_image}', ";
-    $query .= "user_password = '{$user_password}' ";
+    $query .= "user_password = '{$user_password_hash}' ";
     $query .= "WHERE  user_id = {$user_id}";
 
 
@@ -71,7 +72,7 @@ if (isset($_POST['edit_user'])) {
     </div>
     <div class="form-group">
         <select name="user_role" id="user_role">
-            <option value="subscriber"><?= $user_role ?></option>
+            <option value="<?= $user_role ?>"><?= $user_role ?></option>
             <?php
 
             if ($user_role == 'admin') {

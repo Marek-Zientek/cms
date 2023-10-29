@@ -4,6 +4,10 @@ session_start();
 
 if (isset($_POST['login'])) {
 
+
+
+
+
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -29,7 +33,12 @@ if (isset($_POST['login'])) {
         $db_user_email = $row['user_email'];
     }
 
-    if ($username === $db_username && $password === $db_user_password) {
+
+
+
+
+    if ($username === $db_username && password_verify($password, $db_user_password)) {
+
 
         $_SESSION['username'] = $db_username;
         $_SESSION['firstname'] = $db_user_firstname;
@@ -37,6 +46,7 @@ if (isset($_POST['login'])) {
         $_SESSION['user_role'] = $db_user_role;
         $_SESSION['user_email'] = $db_user_email;
         $_SESSION['user_password'] = $db_user_password;
+
 
         header("Location: ../admin");
     } else {
