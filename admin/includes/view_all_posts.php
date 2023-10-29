@@ -109,7 +109,7 @@ if (isset($_POST['checkBoxArray'])) {
                 echo "<td>{$post_comment_count}</td>";
                 echo "<td>{$post_date}</td>";
                 echo "<td><a class=\"btn btn-success\" href=\"../post.php?post_id={$post_id}\">View Post</a></td>";
-                echo "<td><a class=\"btn btn-danger\" href=\"posts.php?delete={$post_id}\">Delete</a></td>";
+                echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete?');\" class=\"btn btn-danger\" href=\"posts.php?delete={$post_id}\">Delete</a></td>";
                 echo "<td><a class=\"btn btn-warning\" href=\"posts.php?source=edit_post&post_id={$post_id}\">Edit Post</a></td>";
                 echo "</tr>";
             }
