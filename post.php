@@ -17,40 +17,46 @@ include "./includes/navigation.php";
 
             if (isset($_GET['post_id'])) {
                 $the_post_id = $_GET['post_id'];
-            }
-            $query = "SELECT * FROM posts WHERE post_id = {$the_post_id}";
-            $select_all_posts_query = mysqli_query($connection, $query);
 
-            while ($row = mysqli_fetch_array($select_all_posts_query)) {
-                $post_title = $row['post_title'];
-                $post_author = $row['post_author'];
-                $post_date = $row['post_date'];
-                $post_image = $row['post_image'];
-                $post_content = $row['post_content'];
+                $view_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = {$the_post_id}";
+                $send_query = mysqli_query($connection, $view_query);
+
+                $query = "SELECT * FROM posts WHERE post_id = {$the_post_id}";
+                $select_all_posts_query = mysqli_query($connection, $query);
+
+                while ($row = mysqli_fetch_array($select_all_posts_query)) {
+                    $post_title = $row['post_title'];
+                    $post_author = $row['post_author'];
+                    $post_date = $row['post_date'];
+                    $post_image = $row['post_image'];
+                    $post_content = $row['post_content'];
 
             ?>
 
-                <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
-                </h1>
+                    <h1 class="page-header">
+                        Page Heading
+                        <small>Secondary Text</small>
+                    </h1>
 
-                <!-- First Blog Post -->
-                <h2>
-                    <a href="#"><?= $post_title ?></a>
-                </h2>
-                <p class="lead">
-                    by <a href="index.php"><?= $post_author ?></a>
-                </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on <?= $post_date ?></p>
-                <hr>
-                <img class="img-responsive" src="images/<?= $post_image ?>" alt="">
-                <hr>
-                <p><?= $post_content ?></p>
-                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <!-- First Blog Post -->
+                    <h2>
+                        <a href="#"><?= $post_title ?></a>
+                    </h2>
+                    <p class="lead">
+                        by <a href="index.php"><?= $post_author ?></a>
+                    </p>
+                    <p><span class="glyphicon glyphicon-time"></span> Posted on <?= $post_date ?></p>
+                    <hr>
+                    <img class="img-responsive" src="images/<?= $post_image ?>" alt="">
+                    <hr>
+                    <p><?= $post_content ?></p>
+                    <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
-                <hr>
+                    <hr>
             <?php
+                }
+            } else {
+                header("Location: index.php");
             }
 
 

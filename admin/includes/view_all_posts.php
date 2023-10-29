@@ -99,6 +99,7 @@ if (isset($_POST['checkBoxArray'])) {
                 <th>View Post</th>
                 <th>delete</th>
                 <th>edit</th>
+                <th>Visit Count</th>
             </tr>
         </thead>
         <tbody>
@@ -116,6 +117,7 @@ if (isset($_POST['checkBoxArray'])) {
                 $post_tags = $row['post_tags'];
                 $post_comment_count = $row['post_comment_count'];
                 $post_date = $row['post_date'];
+                $post_views_count = $row['post_views_count'];
 
                 echo "<tr>";
                 echo "<td><input class=\"checkBoxes\" type=\"checkbox\" name=\"checkBoxArray[]\" value=\"{$post_id}\"></td>";
@@ -141,6 +143,7 @@ if (isset($_POST['checkBoxArray'])) {
                 echo "<td><a class=\"btn btn-success\" href=\"../post.php?post_id={$post_id}\">View Post</a></td>";
                 echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete?');\" class=\"btn btn-danger\" href=\"posts.php?delete={$post_id}\">Delete</a></td>";
                 echo "<td><a class=\"btn btn-warning\" href=\"posts.php?source=edit_post&post_id={$post_id}\">Edit Post</a></td>";
+                echo "<td><a href=\"posts.php?reset={$post_id}\">{$post_views_count}</a></td>";
                 echo "</tr>";
             }
 
@@ -157,7 +160,17 @@ if (isset($_POST['checkBoxArray'])) {
 if (isset($_GET['delete'])) {
     $post_id = $_GET['delete'];
 
-    $query = "DELETE FROM posts WHERE post_id = {$post_id}";
+    $query = "DELETE FROM posts WHERE post_id = " . mysqli_escape_string($connection, $_GET['delete']) . "";
+    $delete_query = mysqli_query($connection, $query);
+    confirmQuery($delete_query);
+    header("Location: posts.php");
+}
+
+
+if (isset($_GET['reset'])) {
+    $post_id = $_GET['reset'];
+
+    $query = "UPDATE posts SET post_views_count = 0 WHERE post_id = {$post_id}";
     $delete_query = mysqli_query($connection, $query);
     confirmQuery($delete_query);
     header("Location: posts.php");
